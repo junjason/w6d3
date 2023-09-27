@@ -7,10 +7,10 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 ApplicationRecord.transaction do
-    puts "Destroying tables..."
-    User.destroy_all
-    Artwork.destroy_all
+    # puts "Destroying tables..."
     ArtworkShare.destroy_all
+    Artwork.destroy_all
+    User.destroy_all
 
     puts "Resetting primary keys..."
     %w(users artworks artwork_shares).each do |table_name|
@@ -20,7 +20,7 @@ ApplicationRecord.transaction do
     puts "Creating seed data..."
     u1 = User.create!(username: "yuri")
     u2 = User.create!(username: "spence")
-    a1 = Artwork.create!(title: "Flowers", image_url: "google.come/image/flower", artist: u1)
-    s1 = ArtworkShare.create!(artwork: a1, viewer: u2)
+    a1 = Artwork.create!(title: "Flowers", image_url: "google.come/image/flower", artist_id: u1.id)
+    s1 = ArtworkShare.create!(artwork_id: a1.id, viewer_id: u2.id)
     puts "Done!"
 end
