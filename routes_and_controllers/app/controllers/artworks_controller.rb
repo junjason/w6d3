@@ -5,7 +5,7 @@ class ArtworksController < ApplicationController
     end
 
     def create
-        artwork = Artwork.new(user_params)
+        artwork = Artwork.new(artwork_params)
         if artwork.save
             render json: artwork
         else
@@ -21,8 +21,8 @@ class ArtworksController < ApplicationController
     def update 
         artwork = Artwork.find(params[:id])
 
-        if artwork.update(user_params)
-            redirect_to user_url(artwork)
+        if artwork.update(artwork_params)
+            redirect_to artwork_url(artwork)
         else
             render artwork.errors.full_messages, status: 422
         end
@@ -33,7 +33,7 @@ class ArtworksController < ApplicationController
         artwork = Artwork.find_by(id: params[:id])
 
         if artwork && artwork.destroy
-            redirect_to users_url
+            redirect_to artworks_url
         else
             render json: {'error': "Artwork doesn't exist"}, status: 404
         end
@@ -42,6 +42,6 @@ class ArtworksController < ApplicationController
 
     private
     def artwork_params
-        params.require(:artwork).permit(:username)
+        params.require(:artwork).permit(:title, :image_url, :artist_id)
     end
 end
