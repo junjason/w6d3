@@ -29,7 +29,8 @@ class Artwork < ApplicationRecord
     has_many :artwork_shares,
         primary_key: :id,
         foreign_key: :viewer_id,
-        class_name: :ArtworkShare
+        class_name: :ArtworkShare,
+        dependent: :destroy
 
     has_many :shared_artworks,
         through: :artwork_shares,
@@ -38,6 +39,12 @@ class Artwork < ApplicationRecord
     has_many :shared_viewers,
         through: :artwork_shares,
         source: :viewer
+
+    has_many :comments,
+        primary_key: :id,
+        foreign_key: :artwork_id,
+        class_name: :Comment,
+        dependent: :destroy
 
     def self.find_all_artwork_for_id(user_id)
         Artwork.joins("LEFT OUTER JOIN artwork_shares ON artwork_shares.artwork_id = artworks.id")

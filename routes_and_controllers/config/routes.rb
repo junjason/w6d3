@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   # get '/users/:id/artworks/', to: 'artworks#index'
 
   resources :artwork_shares, only: [:create, :destroy]
+
+  resources :comments, only: [:create, :destroy, :index]
 end

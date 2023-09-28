@@ -24,6 +24,7 @@ ApplicationRecord.transaction do
     a2 = Artwork.create!(title: "Flowers 2", image_url: "google.come/image/flower", artist_id: u2.id)
     s1 = ArtworkShare.create!(artwork_id: a1.id, viewer_id: u1.id)
     s2 = ArtworkShare.create!(artwork_id: a1.id, viewer_id: u2.id)
+    c1 = Comment.create!(author_id: u1.id, artwork_id: a1.id, body: "this is yuri's")
 
     puts "Done!"
 end
