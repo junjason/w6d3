@@ -21,6 +21,9 @@ ApplicationRecord.transaction do
     u1 = User.create!(username: "yuri")
     u2 = User.create!(username: "spence")
     a1 = Artwork.create!(title: "Flowers", image_url: "google.come/image/flower", artist_id: u1.id)
-    s1 = ArtworkShare.create!(artwork_id: a1.id, viewer_id: u2.id)
+    a2 = Artwork.create!(title: "Flowers 2", image_url: "google.come/image/flower", artist_id: u2.id)
+    s1 = ArtworkShare.create!(artwork_id: a1.id, viewer_id: u1.id)
+    s2 = ArtworkShare.create!(artwork_id: a1.id, viewer_id: u2.id)
+
     puts "Done!"
 end
