@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
     def index
         if params[:query]
-            users = User.where("users.username = ?", params[:query])
+            users = User.where("users.username LIKE ?", "#{params[:query]}%")
         else
             users = User.all
         end
