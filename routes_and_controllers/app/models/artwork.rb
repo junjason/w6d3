@@ -39,5 +39,8 @@ class Artwork < ApplicationRecord
         through: :artwork_shares,
         source: :viewer
 
-    
+    def self.find_all_artwork_for_id(user_id)
+        Artwork.joins("LEFT OUTER JOIN artwork_shares ON artwork_shares.artwork_id = artworks.id")
+        .where("artworks.artist_id = ? OR artwork_shares.viewer_id = ?", user_id).distinct
+    end
 end
